@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="CoduriPostale" default="copyToApache" basedir=".">
+
+	<property file="config.properties" />
+	<property name="root" value="." />
+
+	<target name="spool" description="spool database">
+		<echo message="dump database tables for hosting" />
+		<exec executable="${basedir}/sql/misc-dump-hosting.bat">
+			<arg value="${CONN_USER}" />
+			<arg value="${CONN_PWD}" />
+		</exec>
+	</target>
+
+	<target name="copyToApache">
+		<copy toDir="../corona-ro-api/api/controllers" verbose="true">
+			<fileset dir="api/controllers/">
+				<include name="*.php" />
+			</fileset>
+		</copy>
+		<copy toDir="../corona-ro-api/api/v1/localitati" verbose="true">
+			<fileset dir="api/v1/localitati">
+				<include name="*.php" />
+			</fileset>
+		</copy>
+	</target>
+
+</project>

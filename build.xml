@@ -1,28 +1,60 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<project name="CoduriPostale" default="copyToApache" basedir=".">
+<project name="api" default="copyallfiles" basedir=".">
 
 	<property file="config.properties" />
 	<property name="root" value="." />
 
-	<target name="spool" description="spool database">
-		<echo message="dump database tables for hosting" />
-		<exec executable="${basedir}/sql/misc-dump-hosting.bat">
-			<arg value="${CONN_USER}" />
-			<arg value="${CONN_PWD}" />
-		</exec>
+	<target name="copyallfiles" description="upload all site files via Ftp" depends="deletefiles">
+		<!-- the data base files must not to be deleted or overridden | the json files are managed by the other project -->
+		<echo message="copy files to ${FTP_SERVER}" />
+		<ftp action="put" verbose="yes" server="${FTP_SERVER}" userid="${FTP_USER}" password="${FTP_PASS}" remotedir="/api">
+			<fileset dir="api">
+				<exclude name="/config/database*.php" />
+				<exclude name="/json/*.json" />
+			</fileset>
+		</ftp>
+		<echo message="copy files to ${FTP_SERVER_NAS}" />
+		<ftp action="put" verbose="yes" server="${FTP_SERVER_NAS}" userid="${FTP_USER_NAS}" password="${FTP_PASS_NAS}" remotedir="/web/api">
+			<fileset dir="api">
+				<exclude name="/config/database*.php" />
+				<exclude name="/json/*.json" />
+			</fileset>
+		</ftp>
 	</target>
 
-	<target name="copyToApache">
-		<copy toDir="../corona-ro-api/api/controllers" verbose="true">
-			<fileset dir="api/controllers/">
-				<include name="*.php" />
+	<target name="deletefiles" description="delete all site files from remote server">
+		<echo message="delete files from ${FTP_SERVER}" />
+		<ftp action="delete" verbose="yes" server="${FTP_SERVER}" userid="${FTP_USER}" password="${FTP_PASS}" remotedir="/api">
+			<fileset>
+				<include name="*/**" />
+				<exclude name="/config/database*.php" />
+				<exclude name="/json/*.json" />
 			</fileset>
-		</copy>
-		<copy toDir="../corona-ro-api/api/v1/localitati" verbose="true">
-			<fileset dir="api/v1/localitati">
-				<include name="*.php" />
+		</ftp>
+		<echo message="remove directories from ${FTP_SERVER}" />
+		<ftp action="rmdir" verbose="yes" server="${FTP_SERVER}" userid="${FTP_USER}" password="${FTP_PASS}" remotedir="/api">
+			<fileset>
+				<exclude name="/config" />
+				<exclude name="/json" />
+				<include name="*/*" />
 			</fileset>
-		</copy>
+		</ftp>
+		<echo message="delete files from ${FTP_SERVER_NAS}" />
+		<ftp action="delete" verbose="yes" server="${FTP_SERVER_NAS}" userid="${FTP_USER_NAS}" password="${FTP_PASS_NAS}" remotedir="/web/api">
+			<fileset>
+				<include name="*/**" />
+				<exclude name="/config/database*.php" />
+				<exclude name="/json/*.json" />
+			</fileset>
+		</ftp>
+		<echo message="remove directories from ${FTP_SERVER_NAS}" />
+		<ftp action="rmdir" verbose="yes" server="${FTP_SERVER_NAS}" userid="${FTP_USER_NAS}" password="${FTP_PASS_NAS}" remotedir="/web/api">
+			<fileset>
+				<exclude name="/config" />
+				<exclude name="/json" />
+				<include name="*/*" />
+			</fileset>
+		</ftp>
 	</target>
 
 </project>

@@ -22,12 +22,12 @@ if ($itemCount > 0) :
     http_response_code(200);
 
     $arr = array();
-    $arr['response'] = array();
+    $arr['localitati'] = array();
     $arr['count'] = $itemCount;
 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) :
         $elem = $row;
-        array_push($arr['response'], $elem["localitate"]);
+        array_push($arr['localitati'], $elem['localitate']);
     endwhile
     ;
 
@@ -42,6 +42,7 @@ else :
     http_response_code(404);
 
     echo json_encode(array(
+        "judet_invalid" => "vezi aici o lista a judetelor valide: " . stripos(strtolower($_SERVER['SERVER_PROTOCOL']), 'https') === 0 ? 'https://' : 'http://' . $_SERVER['HTTP_HOST'] . "/api/v1/judete",
         "type" => "danger",
         "title" => "failed",
         "message" => "No records found"

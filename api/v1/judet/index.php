@@ -4,15 +4,15 @@ header('Content-Type: application/json; charset=UTF-8');
 
 include_once $_SERVER['DOCUMENT_ROOT'] . '/api/config/databaseCorona.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/api/controllers/romania.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/api/modules/AltoRouter/AltoRouter.php';
+//include_once $_SERVER['DOCUMENT_ROOT'] . '/api/modules/AltoRouter/AltoRouter.php';
 
-$router = new AltoRouter();
+//$router = new AltoRouter();
 
-$router->setBasePath('/corona/api/v1/ro/judet');
+//$router->setBasePath('/corona/api/v1/ro/judet');
 
-$router->map('GET', '/', function () {
-    require __DIR__ . '../judete.php';
-});
+//$router->map('GET', '/', function () {
+//    require __DIR__ . '../judete.php';
+//});
 
 $database = new Database();
 

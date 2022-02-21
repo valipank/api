@@ -9,14 +9,14 @@
 		<echo message="copy files to ${FTP_SERVER}" />
 		<ftp action="put" verbose="yes" server="${FTP_SERVER}" userid="${FTP_USER}" password="${FTP_PASS}" remotedir="/api">
 			<fileset dir="api">
-				<exclude name="/config/database*.php" />
+				<exclude name="/config/Database*.php" />
 				<exclude name="/json/*.json" />
 			</fileset>
 		</ftp>
 		<echo message="copy files to ${FTP_SERVER_NAS}" />
 		<ftp action="put" verbose="yes" server="${FTP_SERVER_NAS}" userid="${FTP_USER_NAS}" password="${FTP_PASS_NAS}" remotedir="/web/api">
 			<fileset dir="api">
-				<exclude name="/config/database*.php" />
+				<exclude name="/config/Database*.php" />
 				<exclude name="/json/*.json" />
 			</fileset>
 		</ftp>
@@ -27,7 +27,7 @@
 		<ftp action="delete" verbose="yes" server="${FTP_SERVER}" userid="${FTP_USER}" password="${FTP_PASS}" remotedir="/api">
 			<fileset>
 				<include name="*/**" />
-				<exclude name="/config/database*.php" />
+				<exclude name="/config/Database*.php" />
 				<exclude name="/json/*.json" />
 			</fileset>
 		</ftp>
@@ -36,14 +36,14 @@
 			<fileset>
 				<exclude name="/config" />
 				<exclude name="/json" />
-				<include name="*/*" />
+				<include name="/v1/*" />
 			</fileset>
 		</ftp>
 		<echo message="delete files from ${FTP_SERVER_NAS}" />
 		<ftp action="delete" verbose="yes" server="${FTP_SERVER_NAS}" userid="${FTP_USER_NAS}" password="${FTP_PASS_NAS}" remotedir="/web/api">
 			<fileset>
 				<include name="*/**" />
-				<exclude name="/config/database*.php" />
+				<exclude name="/config/Database*.php" />
 				<exclude name="/json/*.json" />
 			</fileset>
 		</ftp>
@@ -52,7 +52,7 @@
 			<fileset>
 				<exclude name="/config" />
 				<exclude name="/json" />
-				<include name="*/*" />
+				<include name="/v1/*" />
 			</fileset>
 		</ftp>
 	</target>

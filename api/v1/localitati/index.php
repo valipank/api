@@ -2,11 +2,11 @@
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 
-include_once $_SERVER['DOCUMENT_ROOT'] . '/api/config/databaseMisc.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/api/controllers/localitaticontroller.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/api/controllers/judetecontroller.php';
+include_once dirname(__DIR__, 3) . '/api/config/DatabaseMisc.php';
+include_once dirname(__DIR__, 3) . '/api/controllers/LocalitatiController.php';
+include_once dirname(__DIR__, 3) . '/api/controllers/JudeteController.php';
 
-$database = new Database();
+$database = new DatabaseMisc();
 
 $db = $database->getConnection();
 

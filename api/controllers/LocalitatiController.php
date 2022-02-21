@@ -15,12 +15,12 @@ class LocalitatiController
         $query = "SELECT 
                       DISTINCT(localitate) 
                     FROM 
-                      coduri_postale c 
-                      LEFT OUTER JOIN judete_ro j ON c.judet = j.judet_nume 
+                      v_coduripostale 
                     WHERE 
-                      judet_cod = :judet 
+                      judet_cod = :judet
                     ORDER BY 
-                      localitate;";
+                      localitate;
+                    ";
 
         $stmt = $this->conn->prepare($query);
 

@@ -1,12 +1,12 @@
 <?php
 
-class Database
+class DatabaseCorona
 {
 
     // well, you don't think these are the real user/pwd@host :-P
     private $host = "localhost";
 
-    private $database = "coduripostale";
+    private $database = "corona";
 
     private $username = "root";
 

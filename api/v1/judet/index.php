@@ -2,23 +2,14 @@
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 
-include_once $_SERVER['DOCUMENT_ROOT'] . '/api/config/databaseCorona.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/api/controllers/romania.php';
-//include_once $_SERVER['DOCUMENT_ROOT'] . '/api/modules/AltoRouter/AltoRouter.php';
+include_once dirname(__DIR__, 3) . '/api/config/DatabaseCorona.php';
+include_once dirname(__DIR__, 3) . '/api/controllers/RomaniaInfoController.php';
 
-//$router = new AltoRouter();
-
-//$router->setBasePath('/corona/api/v1/ro/judet');
-
-//$router->map('GET', '/', function () {
-//    require __DIR__ . '../judete.php';
-//});
-
-$database = new Database();
+$database = new DatabaseCorona();
 
 $db = $database->getConnection();
 
-$items = new RomaniaInfo($db);
+$items = new RomaniaInfoController($db);
 
 $judet = $_GET['judet'];
 

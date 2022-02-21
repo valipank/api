@@ -1,6 +1,6 @@
 <?php
 
-class RomaniaInfo
+class RomaniaInfoController
 {
 
     private $conn;

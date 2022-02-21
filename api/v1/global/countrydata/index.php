@@ -2,10 +2,10 @@
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 
-include_once $_SERVER['DOCUMENT_ROOT'] . '/api/config/databaseCorona.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/api/controllers/countryinfocontroller.php';
+include_once dirname(__DIR__, 4) . '/api/config/DatabaseCorona.php';
+include_once dirname(__DIR__, 4) . '/api/controllers/CountryInfoController.php';
 
-$database = new Database();
+$database = new DatabaseCorona();
 
 $db = $database->getConnection();
 

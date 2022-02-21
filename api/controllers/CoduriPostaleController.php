@@ -12,11 +12,11 @@ class CoduriPostaleController
 
     public function getListByCodPostal($cod)
     {
-        $query = "SELECT * FROM coduri_postale WHERE cod LIKE :cod;";
+        $query = "SELECT * FROM v_coduripostale WHERE cod_postal LIKE :cod;";
 
         $stmt = $this->conn->prepare($query);
 
-        $stmt->bindParam(':cod', $cod . '%');
+        $stmt->bindParam(':cod', $cod);
 
         $stmt->execute();
 

@@ -41,8 +41,16 @@ if ($itemCount > 0) :
 else :
     http_response_code(404);
 
+    if (! empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) {
+        $uri = 'https://';
+    } else {
+        $uri = 'http://';
+    }
+    $uri .= $_SERVER['HTTP_HOST'];
+    $uri .= "/api/v1/judete";
+
     echo json_encode(array(
-        "judet_invalid" => "vezi aici o lista a judetelor valide: " . stripos(strtolower($_SERVER['SERVER_PROTOCOL']), 'https') === 0 ? 'https://' : 'http://' . $_SERVER['HTTP_HOST'] . "/api/v1/judete",
+        "judet_invalid" => "vezi aici o lista a judetelor valide: " . $uri,
         "type" => "danger",
         "title" => "failed",
         "message" => "No records found"

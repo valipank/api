@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project name="api" default="copyallfiles" basedir=".">
 
-	<property file="config.properties" />
+	<property file="../config.properties" />
 	<property name="root" value="." />
 
 	<target name="copyallfiles" description="upload all site files via Ftp" depends="deletefiles">
@@ -22,7 +22,7 @@
 		</ftp>
 	</target>
 
-	<target name="deletefiles" description="delete all site files from remote server">
+	<target name="deletefiles" description="delete all site files from ${FTP_SERVER}">
 		<echo message="delete files from ${FTP_SERVER}" />
 		<ftp action="delete" verbose="yes" server="${FTP_SERVER}" userid="${FTP_USER}" password="${FTP_PASS}" remotedir="/api">
 			<fileset>

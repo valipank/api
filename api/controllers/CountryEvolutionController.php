@@ -13,8 +13,7 @@ class CountryEvolutionController
     public function read($country)
     {
         $query = "SELECT
-                	   DATE                            		AS raw_date
-                     , DATE_FORMAT(date, '%d/%m/%Y')        AS formatted_date
+                	   date_format(date,'%Y-%m-%d')         AS date
                      , confirmed                            AS confirmed
                      , deaths                               AS deaths
                      , recovered                            AS recovered

@@ -12,8 +12,7 @@ class CountryDailyController
 
     public function read($country, $avg)
     {
-        $query = "SELECT DATE
-                    , date_format(cur.date,'%d/%m/%Y')    AS formatted_date
+        $query = "SELECT date_format(date,'%Y-%m-%d')         AS date
                     , confirmed - COALESCE(
                     (
                     	SELECT confirmed

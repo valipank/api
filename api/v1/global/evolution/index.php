@@ -4,7 +4,6 @@ header('Content-Type: application/json; charset=UTF-8');
 
 include_once dirname(__DIR__, 4) . '/api/config/DatabaseCorona.php';
 include_once dirname(__DIR__, 4) . '/api/controllers/CountryEvolutionController.php';
-include_once dirname(__DIR__, 4) . '/api/controllers/CountryInfoController.php';
 
 $database = new DatabaseCorona();
 
@@ -30,19 +29,21 @@ if ($itemCount > 0) :
     endwhile
     ;
 
-    // call to CountryInfoController
-    $info = new CountryInfoController($db);
-    $stmtinfo = $info->read($country);
-    $resultinfo = $stmtinfo->fetch(PDO::FETCH_ASSOC);
-
-    $arr['country_info'] = $resultinfo;
-
     echo json_encode($arr);
 
 else :
     http_response_code(404);
 
+    if (! empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) {
+        $uri = 'https://';
+    } else {
+        $uri = 'http://';
+    }
+    $uri .= $_SERVER['HTTP_HOST'];
+    $uri .= "/api/json/countries.json";
+
     echo json_encode(array(
+        "invalid_country_iso" => "please provide a valid country iso code: " . $uri,
         "type" => "danger",
         "title" => "failed",
         "message" => "No records found"

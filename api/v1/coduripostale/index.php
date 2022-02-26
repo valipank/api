@@ -58,7 +58,7 @@ if (isset($data->cod)) {
                 "err" => "no_zip_code",
                 "type" => "danger",
                 "title" => "failed",
-                "message" => "Nu exista codul postal"
+                "message" => "Nu exista codul postal cerut"
             ));
         endif;
     }
@@ -93,7 +93,7 @@ if (isset($data->cod)) {
             "err" => "no_zip_codes",
             "type" => "danger",
             "title" => "failed",
-            "message" => "Nu cod pentru combinatia selectata"
+            "message" => "Nu exista cod postal pentru combinatia selectata"
         ));
     endif;
 

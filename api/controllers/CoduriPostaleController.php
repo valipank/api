@@ -22,7 +22,7 @@ class CoduriPostaleController
                     WHERE 
                       cod_postal LIKE :cod 
                     ORDER by 
-                      cod_postal;";
+                      cod_postal, denumire_artera, numar;";
 
         $stmt = $this->conn->prepare($query);
 
@@ -49,9 +49,9 @@ class CoduriPostaleController
             $query .= "AND localitate LIKE :localitate ";
         }
         if (! empty($strada)) {
-            $query .= "AND denumire_artera LIKE :strada";
+            $query .= "AND denumire_artera LIKE :strada ";
         }
-        $query .= ";";
+        $query .= "ORDER by denumire_artera, numar;";
 
         $stmt = $this->conn->prepare($query);
 

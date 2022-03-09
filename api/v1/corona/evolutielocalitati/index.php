@@ -22,12 +22,12 @@ if ($itemCount > 0) :
     http_response_code(200);
 
     $arr = array();
-    $arr['evolutie'] = array();
+    $arr['response'] = array();
     $arr['count'] = $itemCount;
 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) :
         $elem = $row;
-        array_push($arr['evolutie'], $elem);
+        array_push($arr['response'], $elem);
     endwhile
     ;
 

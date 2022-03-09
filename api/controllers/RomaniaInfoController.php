@@ -15,7 +15,7 @@ class RomaniaInfoController
     {
         $query = "SELECT
                 judet
-                , DATE_FORMAT(data, '%d/%m/%Y')        AS formatted_date
+                , date_format(data,'%Y-%m-%d') AS date
                 , confirmed
                 , incidence
                 , avg_confirmed

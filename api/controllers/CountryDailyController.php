@@ -55,9 +55,9 @@ class CountryDailyController
                     	FROM full_corona prev
                     	INNER JOIN countries ON prev.country = countries.country
                     	WHERE iso = :country
-                    	AND prev.date = date_sub(cur.date, INTERVAL " . $avg . " DAY)
+                    	AND prev.date = date_sub(cur.date, INTERVAL :avg DAY)
                     	ORDER BY DATE asc
-                    	LIMIT 1 ), 0)) / " . $avg . ", 2) AS avg_confirmed
+                    	LIMIT 1 ), 0)) / :avg, 2) AS avg_confirmed
                     FROM full_corona cur
                     INNER JOIN countries ON cur.country = countries.country
                     WHERE iso = :country
@@ -67,6 +67,7 @@ class CountryDailyController
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(':country', $country);
+        $stmt->bindParam(':avg', $avg);
 
         $stmt->execute();
 

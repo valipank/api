@@ -38,9 +38,9 @@ class RomaniaInfoController
                 	SELECT confirmed
                 	FROM full_corona_ro prev
                 	WHERE judet = :judet
-                	AND prev.data = date_sub(cur.data, INTERVAL " . $avg . " DAY)
+                	AND prev.data = date_sub(cur.data, INTERVAL :avg DAY)
                 	ORDER BY DATa asc
-                	LIMIT 1 ), 0)) / " . $avg . ", 2) avg_confirmed
+                	LIMIT 1 ), 0)) / :avg, 2) avg_confirmed
                 FROM full_corona_ro cur
                 WHERE judet= :judet
                 ORDER BY DATA ASC
@@ -49,6 +49,7 @@ class RomaniaInfoController
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(':judet', $judet);
+        $stmt->bindParam(':avg', $avg);
 
         $stmt->execute();
 
